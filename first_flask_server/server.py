@@ -14,5 +14,12 @@ def say_hello():
 def home_page():
     return "Home page"
 
+# adding multiple variables 
+@app.route("/<username>/<int:age>")
+def profile(username,age):
+    return f"my name is {username} and my age is {age}"
+
 if __name__ == "__main__":
-    app.run()
+    # making debug to activate
+    # auto reload
+    app.run(debug=True)
