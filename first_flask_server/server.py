@@ -5,6 +5,14 @@ app = Flask(__name__)
 
 # print(app) #<Flask 'server'>
 
+# making decorators
+def make_bold(function):
+    def wrapper_function():
+        f"<b></b>"
+        function()
+    return wrapper_function 
+
+
 # creating our routes
 @app.route("/")
 def say_hello():
