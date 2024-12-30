@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+</head>
+<body>
+    <!-- The 'action' specifies the endpoint, and 'method' specifies the HTTP request type. -->
+    <form action="/login" method="post">
+        <label for="username">First Name</label>
+        <!-- Add the 'name' attribute to link the input to Flask's request.form -->
+        <input type="text" id="username" name="username" placeholder="name" required>
+        
+        <label for="password">Password</label>
+        <!-- Add the 'name' attribute for the password field -->
+        <input type="password" id="password" name="password" placeholder="password">
+        
+        <button type="submit">Ok</button>
+    </form>
+</body>
+</html>
