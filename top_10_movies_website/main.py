@@ -35,13 +35,47 @@ class Movie(db.Model):
 
 with app.app_context():
     db.create_all()
-  
-  
+ 
+ 
+# flask forms 
+class  MovieForm(FlaskForm):
+     rating = StringField("Your rating out of 10 e.g. 7.5",validators=[DataRequired()])
+     review = StringField("Your review",validators=[DataRequired()])
+     submit = SubmitField("Submit")
+     
+
+
+# home route
 @app.route("/")
 def home():
     result = db.session.execute(db.select(Movie))
     all_movies = result.scalars().all()
     return render_template("index.html", movie=all_movies)
+
+# update route 
+@app.route("/edit", methods=["GET", "POST"])
+def edit():
+    form = MovieForm()
+    movie_id = request.args.get("id")
+    movie = db.get_or_404(Movie, movie_id)
+    if form.validate_on_submit():
+        movie.rating = float(form.rating.data)
+        movie.review = form.review.data
+        db.session.commit()
+        return redirect(url_for("home"))
+    # Pre-populate the form with the current movie data
+    form.rating.data = str(movie.rating) if movie.rating else ""
+    form.review.data = movie.review if movie.review else ""
+    return render_template("edit.html", movie=movie, form=form)
+
+# delete route
+@app.route("/delete")
+def delete():
+    movie_id = request.args.get("id")
+    movie = db.get_or_404(Movie,movie_id)
+    db.session.delete(movie)
+    db.session.commit()
+    return redirect(url_for("home"))
 
 
 if __name__ == '__main__':
