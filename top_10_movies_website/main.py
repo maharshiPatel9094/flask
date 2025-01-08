@@ -68,7 +68,7 @@ def edit():
     form.review.data = movie.review if movie.review else ""
     return render_template("edit.html", movie=movie, form=form)
 
-# delete route
+# delete route --> id , delete, update 
 @app.route("/delete")
 def delete():
     movie_id = request.args.get("id")
