@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}Flask_Market_app{% endblock %}
+{% block title %}Flask Market App{% endblock %}
 
 {% block content %}
-<h1>Welcome to the Flask Market App</h1>
+{% include 'navbar.html' %}
+<h1 class="text-primary text-center mt-4">Welcome to the Flask Market App</h1>
+<p class="lead text-center">This is your home page, styled with Bootstrap.</p>
 {% endblock %}
